@@ -1,0 +1,29 @@
+{
+  "use": true,
+  "group": "tb-mod",
+  "template": [
+    "index.js"
+  ],
+  "map": [
+    {
+      "origin": "renderData.import",
+      "target": "import"
+    },
+    {
+      "origin": "renderData.style",
+      "target": "style"
+    },
+    {
+      "origin": "renderData.mockData",
+      "target": "mockData"
+    },
+    {
+      "origin": "renderData.modClass",
+      "target": "modClass"
+    },
+    {
+      "origin": "renderData.export",
+      "target": "export"
+    }
+  ]
+}

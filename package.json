@@ -1,18 +1,30 @@
 {
-  "name": "@imgcook/dsl-template",
+  "eslintConfig": {
+    "root": true
+  },
   "devDependencies": {
-    "@imgcook/dsl-helper": "^0.0.1-alpha.0",
-    "co": "^4.6.0",
-    "fs-extra": "^8.0.1",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-stage-0": "^7.0.0",
+    "@imgcook/cli": "0.0.2-alpha.3",
+    "co": "4.x.x",
     "lodash": "^4.17.11",
     "prettier": "^1.11.1",
-    "thunkify": "^2.1.2",
+    "thunkify": "2.x.x",
     "vm2": "^3.5.2",
-    "xml-beautifier": "^0.4.0",
-    "xtemplate": "^4.6.1",
-    "xtpl": "^3.4.0"
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.5",
+    "xml-beautifier": "0.x.x",
+    "xtemplate": "4.x.x",
+    "xtpl": "3.x.x"
   },
   "scripts": {
+    "debug": "npx webpack --config webpack.config.js --mode=development",
+    "build": "npx webpack --config webpack.config.js --mode=production",
     "test": "node ./test/index.js"
+  },
+  "dependencies": {
+    "@imgcook/dsl-helper": "0.0.1-alpha.0",
+    "deepmerge": "^3.3.0",
+    "fs-extra": "^9.0.0"
   }
 }
