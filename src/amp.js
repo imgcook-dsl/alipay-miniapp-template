@@ -252,9 +252,15 @@ module.exports = function (layoutData, opts) {
       }
     }
 
-    obj.element = COMPONENT_TYPE_MAP[obj.componentType] || obj.componentType;
-    if (!obj.style) obj.style = {};
-    if (!obj.attrs) obj.attrs = {};
+    obj.element = COMPONENT_TYPE_MAP[obj.componentName] || obj.componentName.toLowerCase();
+    if (!obj.props) obj.props = {};
+    if (obj.props.style) {
+      obj.style = obj.props.style;
+      delete obj.props.style;
+    } else {
+      obj.style = {}
+    }
+    obj.attrs = obj.props;
 
     if (obj.type && obj.type.toLowerCase() === 'repeat') {
       obj.style.display = 'flex';
@@ -331,7 +337,7 @@ module.exports = function (layoutData, opts) {
         obj.children = null;
         break;
       case 'text':
-        obj.children = obj.innerText;
+        obj.children = obj.innerText || obj.attrs.text;
         break;
     }
 
@@ -349,7 +355,7 @@ module.exports = function (layoutData, opts) {
     }
 
     if (obj.attrs.source && obj.attrs.src) {
-      obj.attrs.src = obj.attrs.source;
+      obj.attrs.src = obj.attrs.source || obj.attrs.src;
       delete obj.attrs.source;
     }
 

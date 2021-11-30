@@ -50,7 +50,7 @@ const COMPONENT_TYPE_MAP = {
     let designWidth = modConfig.designWidth;
     let htmlFontsize = viewportWidth ? viewportWidth / 10 : null;
   
-    let scopeClass = originJson.attrs.className;
+    let scopeClass = originJson.props.className;
     let mockDataStore = {};
   
     // js的事件部分生成
@@ -191,8 +191,8 @@ const COMPONENT_TYPE_MAP = {
           result = result.concat(_i);
         });
       } else if (typeof json == 'object') {
-        let type = json.componentType;
-        let className = json.attrs && json.attrs.className;
+        let type = json.componentName;
+        let className = json.props && json.props.className;
   
         scriptStore.map(_v => {
           if (_v.belongId == json.id) {
@@ -232,29 +232,29 @@ const COMPONENT_TYPE_MAP = {
         });
         // TDODODO
         if (
-          typeof json.style.borderTopLeftRadius !== 'undefined' &&
-          json.style.borderTopLeftRadius === json.style.borderTopRightRadius &&
-          json.style.borderTopLeftRadius === json.style.borderBottomLeftRadius &&
-          json.style.borderTopLeftRadius === json.style.borderBottomRightRadius
+          typeof json.props.style.borderTopLeftRadius !== 'undefined' &&
+          json.props.style.borderTopLeftRadius === json.props.style.borderTopRightRadius &&
+          json.props.style.borderTopLeftRadius === json.props.style.borderBottomLeftRadius &&
+          json.props.style.borderTopLeftRadius === json.props.style.borderBottomRightRadius
         ) {
-          json.style.borderRadius = json.style.borderTopLeftRadius;
-          delete json.style.borderTopLeftRadius;
-          delete json.style.borderTopRightRadius;
-          delete json.style.borderBottomLeftRadius;
-          delete json.style.borderBottomRightRadius;
+          json.props.style.borderRadius = json.props.style.borderTopLeftRadius;
+          delete json.props.style.borderTopLeftRadius;
+          delete json.props.style.borderTopRightRadius;
+          delete json.props.style.borderBottomLeftRadius;
+          delete json.props.style.borderBottomRightRadius;
         }
   
-        if (json.style.lines == 1 || json.attrs.lines == 1) {
-          delete json.style.width;
+        if (json.props.lines == 1) {
+          delete json.props.style.width;
         }
   
-        if (json.style.borderWidth) {
-          json.style.boxSizing = 'border-box';
+        if (json.props.style.borderWidth) {
+          json.props.style.boxSizing = 'border-box';
         }
   
         if (json.type && json.type.toLowerCase() === 'repeat') {
-          json.style.display = 'flex';
-          json.style.flexDirection = 'row';
+          json.props.style.display = 'flex';
+          json.props.style.flexDirection = 'row';
           json.children.forEach(function(child) {
             delete child.style.marginTop;
           });
@@ -262,7 +262,7 @@ const COMPONENT_TYPE_MAP = {
   
         cssStore.push({
           styleName: className,
-          styleValue: json.style
+          styleValue: json.props.style
         });
   
         switch (type) {
